@@ -1,26 +1,26 @@
-// src/App.js
-import React, { useState } from 'react';
-import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
-import Login from './components/Login';
-import Register from './components/Register';
-import Chat from './components/Chat';
-import { AuthProvider } from './context/AuthContext';
+import React from "react";
+import Login from "./components/Login";
+import Register from "./components/Register";
+import Chat from "./components/Chat";
 
 function App() {
-  return (
-    <AuthProvider>
-      <Router>
-        <div className="min-h-screen bg-gray-100">
-          <Routes>
-            <Route path="/login" element={<Login />} />
-            <Route path="/register" element={<Register />} />
-            <Route path="/chat" element={<Chat />} />
-            <Route path="/" element={<Navigate to="/login" replace />} />
-          </Routes>
-        </div>
-      </Router>
-    </AuthProvider>
-  );
+  // Get the current path
+  const path = window.location.pathname;
+
+  // Simple routing
+  const renderComponent = () => {
+    switch (path) {
+      case "/register":
+        return <Register />;
+      case "/chat":
+        return <Chat />;
+      case "/login":
+      default:
+        return <Login />;
+    }
+  };
+
+  return <div className="min-h-screen bg-gray-100">{renderComponent()}</div>;
 }
 
 export default App;

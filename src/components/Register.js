@@ -23,7 +23,10 @@ function Register() {
         throw new Error("Registration failed");
       }
 
-      // On successful registration
+      // Store username in localStorage
+      localStorage.setItem("username", username);
+
+      // Redirect to chat
       window.location.href = "/chat";
     } catch (err) {
       setError("Registration failed. Please try again.");
@@ -68,6 +71,14 @@ function Register() {
             Register
           </button>
         </form>
+        <div className="mt-4 text-center">
+          <button
+            onClick={() => (window.location.href = "/login")}
+            className="text-blue-500 hover:text-blue-600"
+          >
+            Already have an account? Login here
+          </button>
+        </div>
       </div>
     </div>
   );
